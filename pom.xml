@@ -129,6 +129,8 @@
 				<configuration>
 					<goals>deploy</goals>
 					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<remoteTagging>false</remoteTagging>
+					<suppressCommitBeforeTag>false</suppressCommitBeforeTag>
 				</configuration>
 			</plugin>
 		</plugins>
