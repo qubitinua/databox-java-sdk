@@ -26,9 +26,8 @@ public abstract class AbstractDataProviderTest<T extends AbstractDataProvider> e
 
 		addAdditionalData(_dataProvider);
 
-		String json = new Gson().toJson(_dataProvider.getKPIs());
-		System.out.println(json);
-
+		String kpis = new Gson().toJson(_dataProvider.getKPIs());
+		
 		DataboxSink sink = new DataboxSink();
 		String apiKey = System.getProperty("databox-api-key");
 		String appId = System.getProperty("databox-app-id");
@@ -36,9 +35,11 @@ public abstract class AbstractDataProviderTest<T extends AbstractDataProvider> e
 		if (apiKey != null && !apiKey.isEmpty() && appId != null && !appId.isEmpty()) {
 			connection = new DataboxCustomConnection(apiKey, appId);
 		} else {
-			System.err.println("Please provide API Key and APP ID");
+			System.err.println("Please provide API Key and APP ID to send data to Databox.");
 			return;
 		}
+		
+		System.out.println(kpis);
 
 		connection.addDataProvider(_dataProvider);
 
