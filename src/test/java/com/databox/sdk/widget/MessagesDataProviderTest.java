@@ -1,8 +1,8 @@
 package com.databox.sdk.widget;
 
-import com.databox.sdk.widgets.progress.MessagesDataProvider;
+import com.databox.sdk.widgets.messages.MessagesDataProvider;
 
-public class MessagesDataProviderTest extends AbstractDataProviderTest<MessagesDataProvider, MessagesDataProvider.Builder> {
+public class MessagesDataProviderTest extends AbstractDataProviderTest<MessagesDataProvider> {
 
 	@Override
 	protected void setUp() throws Exception {
@@ -10,19 +10,14 @@ public class MessagesDataProviderTest extends AbstractDataProviderTest<MessagesD
 	}
 
 	@Override
-	protected void addAdditionalData(MessagesDataProvider.Builder builder) {
-		builder.add("You have **25 new followers.**");
-		builder.add("You have **10 new leads.**");
+	protected void addAdditionalData(MessagesDataProvider dataProvider) {
+		dataProvider.add("You have **25 new followers.**");
+		dataProvider.add("You have **10 new leads.**");
 	}
 
 	@Override
-	protected String getKPIName() {
-		return "visits";
-	}
-
-	@Override
-	protected MessagesDataProvider.Builder newBuilder() {
-		return new MessagesDataProvider.Builder();
+	protected MessagesDataProvider newDataProvider() {
+		return new MessagesDataProvider("visits");
 	}
 
 }

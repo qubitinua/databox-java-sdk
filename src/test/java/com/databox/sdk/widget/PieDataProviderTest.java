@@ -1,30 +1,20 @@
 package com.databox.sdk.widget;
 
-import com.databox.sdk.widgets.funnel.PieDataProvider;
+import com.databox.sdk.widgets.pie.PieDataProvider;
 
-public class PieDataProviderTest extends AbstractDataProviderTest<PieDataProvider, PieDataProvider.Builder> {
-
-	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
+public class PieDataProviderTest extends AbstractDataProviderTest<PieDataProvider> {
 
 	@Override
-	protected void addAdditionalData(PieDataProvider.Builder builder) {
+	protected void addAdditionalData(PieDataProvider dataProvider) {
 		/* Define slices for the pipeline */
-		builder.addSlice("Jakob", 1419911, 4);
-		builder.addSlice("Uroš", 1112111, -7);
-		builder.addSlice("Jan", 615234);
+		dataProvider.addSlice("Jakob", 1419911, 4);
+		dataProvider.addSlice("Uroš", 1112111, -7);
+		dataProvider.addSlice("Jan", 615234);
 	}
 
 	@Override
-	protected String getKPIName() {
-		return "top_three_users";
-	}
-
-	@Override
-	protected PieDataProvider.Builder newBuilder() {
-		return new PieDataProvider.Builder();
+	protected PieDataProvider newDataProvider() {
+		return new PieDataProvider("top_three_users");
 	}
 
 }

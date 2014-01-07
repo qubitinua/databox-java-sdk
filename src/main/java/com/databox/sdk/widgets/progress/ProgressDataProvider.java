@@ -1,4 +1,4 @@
-package com.databox.sdk.widgets.messages;
+package com.databox.sdk.widgets.progress;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,6 +8,8 @@ import com.databox.sdk.widgets.AbstractBuilder;
 import com.databox.sdk.widgets.AbstractDataProvider;
 
 /**
+ * Use ProgressDataProvider.Builder to create a new instance of ProgressDataProvider. Builder ensures that all needed data is entered before creating a new
+ * instance of ProgressDataProvider.
  * 
  * @author Uros Majeric
  * 
@@ -17,7 +19,8 @@ public class ProgressDataProvider extends AbstractDataProvider {
 	private Double value;
 	private Double maxValue;
 
-	protected ProgressDataProvider() {
+	private ProgressDataProvider(String kpiName) {
+		super(kpiName);
 	}
 
 	@Override
@@ -36,7 +39,7 @@ public class ProgressDataProvider extends AbstractDataProvider {
 
 		@Override
 		protected ProgressDataProvider newDataProvider() {
-			return new ProgressDataProvider();
+			return new ProgressDataProvider(kpiName);
 		}
 
 		@Override

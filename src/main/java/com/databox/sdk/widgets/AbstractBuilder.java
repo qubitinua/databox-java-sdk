@@ -16,7 +16,6 @@ public abstract class AbstractBuilder<T extends AbstractDataProvider> {
 			throw new RuntimeException("KPI name should not be empty!");
 		}
 		T dataProvider = newDataProvider();
-		dataProvider.setKpiName(kpiName);
 		dataProvider.setDate(date);
 
 		buildImpl(dataProvider);

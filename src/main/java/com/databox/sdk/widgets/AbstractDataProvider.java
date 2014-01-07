@@ -10,25 +10,22 @@ import com.databox.sdk.DataProvider;
  * 
  */
 public abstract class AbstractDataProvider implements DataProvider {
-	protected String kpiName;
+	protected final String kpiName;
 	protected Date date;
 
-	protected AbstractDataProvider() {
+	protected AbstractDataProvider(String kpiName) {
+		this.kpiName = kpiName;
 	}
 
 	public String getKpiName() {
 		return kpiName;
 	}
 
-	void setKpiName(String kpiName) {
-		this.kpiName = kpiName;
-	}
-
 	public Date getDate() {
 		return date;
 	}
 
-	void setDate(Date date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 }

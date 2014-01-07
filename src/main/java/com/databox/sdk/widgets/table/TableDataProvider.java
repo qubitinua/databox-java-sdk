@@ -10,6 +10,8 @@ import com.databox.sdk.widgets.AbstractDataProvider;
 import com.google.gson.Gson;
 
 /**
+ * TableDataProvider can be build only with the TableDataProvider.Builder. Builder ensures that columns are always added first, after that all rows are added.
+ * Otherwise columns could be added after rows were added.
  * 
  * @author Uros Majeric
  * 
@@ -18,7 +20,8 @@ public class TableDataProvider extends AbstractDataProvider {
 	private List<Column> columns = new ArrayList<Column>();
 	private List<Row> rows = new ArrayList<Row>();
 
-	private TableDataProvider() {
+	private TableDataProvider(String kpiName) {
+		super(kpiName);
 	}
 
 	public List<Column> getColumns() {
@@ -44,24 +47,24 @@ public class TableDataProvider extends AbstractDataProvider {
 			Row row = rows.get(i);
 			List<Object> values = new ArrayList<Object>();
 			List<Object> changes = new ArrayList<Object>();
-			List<String> valueFormats = new ArrayList<String>();
-			List<String> changeFormats = new ArrayList<String>();
+			// List<String> valueFormats = new ArrayList<String>();
+			// List<String> changeFormats = new ArrayList<String>();
 			for (Cell cell : row.getCells()) {
 				values.add(cell.getValue());
 				changes.add(cell.getChange());
-				valueFormats.add(cell.getValueFormat());
-				changeFormats.add(cell.getChangeFormat());
+				// valueFormats.add(cell.getValueFormat());
+				// changeFormats.add(cell.getChangeFormat());
 			}
 			kpis.add(new KPI.Builder().setKey(kpiName + "@row_" + i).setValue(gson.toJson(values)).setDate(date).build());
 			kpis.add(new KPI.Builder().setKey(kpiName + "@change_" + i).setValue(gson.toJson(changes)).setDate(date).build());
-			kpis.add(new KPI.Builder().setKey(kpiName + "@value_format_" + i).setValue(gson.toJson(valueFormats)).setDate(date).build());
-			kpis.add(new KPI.Builder().setKey(kpiName + "@change_format_" + i).setValue(gson.toJson(changeFormats)).setDate(date).build());
+			// kpis.add(new KPI.Builder().setKey(kpiName + "@value_format_" + i).setValue(gson.toJson(valueFormats)).setDate(date).build());
+			// kpis.add(new KPI.Builder().setKey(kpiName + "@change_format_" + i).setValue(gson.toJson(changeFormats)).setDate(date).build());
 		}
 		return kpis;
 	}
 
 	/**
-	 * Builder ensures that columns are always added first after that all rows are added. Otherwise user could add column after rows were added.
+	 * 
 	 * 
 	 * @author Uros Majeric
 	 * 
@@ -85,7 +88,7 @@ public class TableDataProvider extends AbstractDataProvider {
 
 		@Override
 		protected TableDataProvider newDataProvider() {
-			return new TableDataProvider();
+			return new TableDataProvider(kpiName);
 		}
 
 		@Override

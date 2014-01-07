@@ -4,11 +4,10 @@ import java.util.Date;
 
 import junit.framework.TestCase;
 
-import com.databox.sdk.widgets.AbstractBuilder;
 import com.databox.sdk.widgets.AbstractDataProvider;
 import com.google.gson.Gson;
 
-public abstract class AbstractDataProviderTest<T extends AbstractDataProvider, B extends AbstractBuilder<T>> extends TestCase {
+public abstract class AbstractDataProviderTest<T extends AbstractDataProvider> extends TestCase {
 	protected T _dataProvider;
 
 	@Override
@@ -17,24 +16,18 @@ public abstract class AbstractDataProviderTest<T extends AbstractDataProvider, B
 	}
 
 	public final void testDataProvider() {
-		/* First create a new Table.Builder */
-		B builder = newBuilder();
-
 		/* Date is optional (current date is used by default) */
-		builder.setKPIName(getKPIName()).setDate(new Date());
+		_dataProvider = newDataProvider();
+		_dataProvider.setDate(new Date());
 
-		addAdditionalData(builder);
-
-		_dataProvider = builder.build();
+		addAdditionalData(_dataProvider);
 
 		String json = new Gson().toJson(_dataProvider.getKPIs());
 		System.out.println(json);
 	}
 
-	protected abstract void addAdditionalData(B builder);
+	protected abstract T newDataProvider();
 
-	protected abstract String getKPIName();
-
-	protected abstract B newBuilder();
+	protected abstract void addAdditionalData(T dataProvider);
 
 }

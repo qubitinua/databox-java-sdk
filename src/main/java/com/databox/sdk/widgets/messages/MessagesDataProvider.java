@@ -1,11 +1,13 @@
-package com.databox.sdk.widgets.progress;
+package com.databox.sdk.widgets.messages;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.databox.sdk.kpi.KPI;
-import com.databox.sdk.widgets.AbstractBuilder;
 import com.databox.sdk.widgets.AbstractDataProvider;
 
 /**
@@ -14,9 +16,11 @@ import com.databox.sdk.widgets.AbstractDataProvider;
  * 
  */
 public class MessagesDataProvider extends AbstractDataProvider {
+	private static final Logger logger = LoggerFactory.getLogger(MessagesDataProvider.class);
 	private List<String> messages = new ArrayList<String>();
 
-	protected MessagesDataProvider() {
+	public MessagesDataProvider(String kpiName) {
+		super(kpiName);
 	}
 
 	@Override
@@ -32,21 +36,7 @@ public class MessagesDataProvider extends AbstractDataProvider {
 		return kpis;
 	}
 
-	public static class Builder extends AbstractBuilder<MessagesDataProvider> {
-		protected List<String> messages = new ArrayList<String>();
-
-		@Override
-		protected MessagesDataProvider newDataProvider() {
-			return new MessagesDataProvider();
-		}
-
-		@Override
-		protected void buildImpl(MessagesDataProvider dataProvider) {
-			dataProvider.messages.addAll(messages);
-		}
-
-		public void add(String message) {
-			messages.add(message);
-		}
+	public void add(String message) {
+		messages.add(message);
 	}
 }
