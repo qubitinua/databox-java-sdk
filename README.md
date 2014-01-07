@@ -18,19 +18,19 @@ The Java SDK for interacting with the Databox Push API.
 Add a maven repository to your pom file:
 ```xml
 <repository>
-	<id>databox-public-repo</id>
-	<name>Databox Releases</name>
+	<id>umajeric-public-repo</id>
+	<name>Umajeric Releases</name>
 	<releases>
 		<enabled>true</enabled>
 	</releases>
 	<snapshots>
 		<enabled>false</enabled>
 	</snapshots>
-	<url>https://raw.github.com/databox/maven-public-repo/releases</url>
+	<url>https://raw.github.com/umajeric/maven-public-repo/releases</url>
 </repository>
 ```
 
-Then add a dependency for Databox Custom DataSource artefact:
+Then add a dependency for Databox Custom DataSource artefact (see [here](https://github.com/umajeric/maven-public-repo/tree/releases/com/databox/custom-datasource-sdk) to find the latest version):
 ```xml
 <dependency>
 	<groupId>com.databox</groupId>
