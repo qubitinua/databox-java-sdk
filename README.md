@@ -84,7 +84,7 @@ More examples can be found here [Example project]()
 
 ## Documentation
 
-See wiki page for more detailed documentation. 
+See [wiki page](https://github.com/umajeric/databox-java-sdk/wiki) for additional documentation. 
 
 ## License
 
