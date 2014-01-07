@@ -13,7 +13,7 @@ public class FunnelDataProviderTest extends AbstractDataProviderTest<FunnelDataP
 
 	@Override
 	protected FunnelDataProvider newDataProvider() {
-		return new FunnelDataProvider("visits");
+		return new FunnelDataProvider("visitors");
 	}
 
 }

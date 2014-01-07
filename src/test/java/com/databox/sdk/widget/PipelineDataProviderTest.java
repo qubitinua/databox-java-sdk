@@ -19,7 +19,7 @@ public class PipelineDataProviderTest extends AbstractDataProviderTest<PipelineD
 
 	@Override
 	protected PipelineDataProvider newDataProvider() {
-		return new PipelineDataProvider("visits");
+		return new PipelineDataProvider("pipe_visits");
 	}
 
 }

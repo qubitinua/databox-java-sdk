@@ -4,6 +4,10 @@ import java.util.Date;
 
 import junit.framework.TestCase;
 
+import com.databox.sdk.ResponseWrapper;
+import com.databox.sdk.impl.DataPushException;
+import com.databox.sdk.impl.DataboxCustomConnection;
+import com.databox.sdk.impl.DataboxSink;
 import com.databox.sdk.widgets.AbstractDataProvider;
 import com.google.gson.Gson;
 
@@ -24,6 +28,29 @@ public abstract class AbstractDataProviderTest<T extends AbstractDataProvider> e
 
 		String json = new Gson().toJson(_dataProvider.getKPIs());
 		System.out.println(json);
+
+		DataboxSink sink = new DataboxSink();
+		String apiKey = System.getProperty("databox-api-key");
+		String appId = System.getProperty("databox-app-id");
+		DataboxCustomConnection connection = null;
+		if (apiKey != null && !apiKey.isEmpty() && appId != null && !appId.isEmpty()) {
+			connection = new DataboxCustomConnection(apiKey, appId);
+		} else {
+			System.err.println("Please provide API Key and APP ID");
+		}
+
+		connection.addDataProvider(_dataProvider);
+
+		try {
+			ResponseWrapper response = sink.push(connection);
+			if (!response.isSucceeded()) {
+				System.err.println(response.getMessage());
+			} else {
+				System.out.println("Data sent!");
+			}
+		} catch (DataPushException e) {
+			e.printStackTrace();
+		}
 	}
 
 	protected abstract T newDataProvider();
