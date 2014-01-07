@@ -2,8 +2,6 @@ package com.databox.sdk.widgets;
 
 import java.util.Date;
 
-import com.databox.sdk.widgets.table.TableDataProvider.Builder;
-
 /**
  * 
  * @author Uros Majeric
@@ -25,7 +23,7 @@ public abstract class AbstractBuilder<T extends AbstractDataProvider> {
 
 		return dataProvider;
 	}
-	
+
 	public AbstractBuilder<T> setKPIName(String kpiName) {
 		this.kpiName = kpiName;
 		return this;
