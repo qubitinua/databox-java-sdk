@@ -13,7 +13,7 @@ import java.util.TimeZone;
  */
 public class KPI {
 	private String key;
-	private Double value;
+	private Object value;
 	private String date;
 
 	/**
@@ -31,11 +31,11 @@ public class KPI {
 		this.key = key;
 	}
 
-	public Double getValue() {
+	public Object getValue() {
 		return value;
 	}
 
-	public void setValue(Double value) {
+	public void setValue(Object value) {
 		this.value = value;
 	}
 
@@ -57,8 +57,8 @@ public class KPI {
 		if (this.value == null) {
 			this.value = 0D;
 		}
-		if (value != null) {
-			this.value += value;
+		if (value != null && this.value instanceof Double) {
+			this.value = ((Double) this.value) + value;
 		}
 	}
 
@@ -109,7 +109,7 @@ public class KPI {
 		private static SimpleDateFormat SDF;
 
 		private String _key;
-		private Double _value;
+		private Object _value;
 		private Date _date;
 		private boolean _normalized;
 
@@ -123,7 +123,7 @@ public class KPI {
 			return this;
 		}
 
-		public Builder setValue(Double value) {
+		public Builder setValue(Object value) {
 			_value = value;
 			return this;
 		}
