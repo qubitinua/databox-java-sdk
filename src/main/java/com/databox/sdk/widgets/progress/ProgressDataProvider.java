@@ -26,7 +26,7 @@ public class ProgressDataProvider extends AbstractDataProvider {
 	@Override
 	public Collection<KPI> getKPIs() {
 		ArrayList<KPI> kpis = new ArrayList<KPI>();
-		kpis.add(new KPI.Builder().setKey(kpiName + "@label").setValue(label).setDate(date).build());
+		kpis.add(new KPI.Builder().setKey(kpiName + "@labels").setValue(label).setDate(date).build());
 		kpis.add(new KPI.Builder().setKey(kpiName + "@max").setValue(maxValue).setDate(date).build());
 		kpis.add(new KPI.Builder().setKey(kpiName + "@value").setValue(value).setDate(date).build());
 		return kpis;
