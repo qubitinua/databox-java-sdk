@@ -45,8 +45,11 @@ Most basic sample:
 
 ```java
 	DataSink<DataboxCustomConnection> sink = new DataboxSink();
+	
+	String pushToken = "hd32o1ga8sf7sad0fu9sdufs8440442kj2";
+	String pushUrl = "3m2k3u2o3i4hujlb";
 
-	DataboxCustomConnection connection = new DataboxCustomConnection("hd32o1ga8sf7sad0fu9sdufs8440442kj2", "3m2k3u2o3i4hujlb");
+	DataboxCustomConnection connection = new DataboxCustomConnection(pushToken, pushUrl);
 
 	DefaultDataProvider dataProvider = new DefaultDataProvider();
 	dataProvider.addKPI(new KPI.Builder().setKey("new_signups").setValue(234D).build());
@@ -56,12 +59,16 @@ Most basic sample:
 	sink.push(connection);
 ```
 
-One more advanced example (XSLDailyDataProvider implements DataProvider interface):
+One more advanced example (XSLDailyDataProvider implements DataProvider interface) that reads data from [Excel file](https://github.com/umajeric/databox-java-sdk/blob/master/sample/src/main/resources/cycling.xlsx):
+
 ```java
 	DataboxSink sink = new DataboxSink();
 	List<DataboxCustomConnection> connections = new ArrayList<DataboxCustomConnection>();
 	
-	DataboxCustomConnection connection = new DataboxCustomConnection("hd32o1ga8sf7sad0fu9sdufs8440442kj2", "3m2k3u2o3i4hujlb");
+	String pushToken = "hd32o1ga8sf7sad0fu9sdufs8440442kj2";
+	String pushUrl = "3m2k3u2o3i4hujlb";
+	
+	DataboxCustomConnection connection = new DataboxCustomConnection(pushToken, pushUrl);
 	XSLDailyDataProvider xlsxDataProvider = new XSLDailyDataProvider("cycling.xlsx");
 	connection.addDataProvider(xlsxDataProvider);
 	/* You can implement your own data provider that implements DataProvider interface */
@@ -80,7 +87,19 @@ One more advanced example (XSLDailyDataProvider implements DataProvider interfac
 
 ```
 
-More examples can be found here [Example project]()
+Snippet from excel file:
+
+|Date	|Total Time	|Moving Time	|Distance	|Distance Unit	|Average Speed	|Max Speed	|Speed Unit|
+| -------:| ------:| ------:| ------:|:------ | ------:| ------:|:------|
+|7/6/13		| 56	| 56	| 27.00	| km	| 28.93	| 34.00	| km/h |
+|7/7/13		| 34	| 34	| 13	| km	| 22.94	| 30	| km/h |
+|7/8/13		| 56	| 56	| 23	| km	| 24.64	| 38	| km/h |
+|7/9/13		| 63	| 63	| 28	| km	| 26.67	| 35	| km/h |
+|7/10/13	| 22	| 22	| 9	| km	| 24.55	| 35	| km/h |
+
+
+
+More examples can be found here [Example project](https://github.com/umajeric/databox-java-sdk/tree/master/sample)
 
 ## Documentation
 
