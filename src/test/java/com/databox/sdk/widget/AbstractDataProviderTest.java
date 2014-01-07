@@ -37,6 +37,7 @@ public abstract class AbstractDataProviderTest<T extends AbstractDataProvider> e
 			connection = new DataboxCustomConnection(apiKey, appId);
 		} else {
 			System.err.println("Please provide API Key and APP ID");
+			return;
 		}
 
 		connection.addDataProvider(_dataProvider);
