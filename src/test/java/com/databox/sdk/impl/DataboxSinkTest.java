@@ -21,6 +21,7 @@ public class DataboxSinkTest extends TestCase {
 
 	private DataboxCustomConnection _connection;
 
+	@Override
 	protected void setUp() throws Exception {
 		_sink = new DataboxSink();
 		String apiKey = System.getProperty("databox-api-key");

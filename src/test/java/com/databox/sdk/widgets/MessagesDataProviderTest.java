@@ -1,6 +1,6 @@
-package com.databox.sdk.widget;
+package com.databox.sdk.widgets;
 
-import com.databox.sdk.widgets.messages.MessagesDataProvider;
+import com.databox.sdk.widgets.MessagesDataProvider;
 
 public class MessagesDataProviderTest extends AbstractDataProviderTest<MessagesDataProvider> {
 

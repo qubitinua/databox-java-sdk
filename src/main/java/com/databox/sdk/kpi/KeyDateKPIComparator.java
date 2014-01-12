@@ -3,6 +3,7 @@ package com.databox.sdk.kpi;
 import java.util.Comparator;
 
 /**
+ * Comparator that compares two KPIs on their keys and date only. Value is not taken into the account in this comparator.
  * 
  * @author Uros Majeric
  * 

@@ -1,6 +1,7 @@
 package com.databox.sdk.widgets.table;
 
 /**
+ * One cell in table for the widget. Cell has information about the value in the cell, change according the previous period and the format for the value.
  * 
  * @author Uros Majeric
  * 
@@ -8,8 +9,9 @@ package com.databox.sdk.widgets.table;
 public class Cell {
 	private Object value;
 	private Object change;
-//	private String valueFormat;
-//	private String changeFormat;
+	private String valueFormat;
+
+	// private String changeFormat;
 
 	public Cell() {
 	}
@@ -29,8 +31,8 @@ public class Cell {
 	public Cell(Object value, Object change, String valueFormat, String changeFormat) {
 		this.value = value;
 		this.change = change;
-//		this.valueFormat = valueFormat;
-//		this.changeFormat = changeFormat;
+		this.valueFormat = valueFormat;
+		// this.changeFormat = changeFormat;
 	}
 
 	public Object getValue() {
@@ -41,13 +43,13 @@ public class Cell {
 		this.value = value;
 	}
 
-//	public String getValueFormat() {
-//		return valueFormat;
-//	}
-//
-//	public void setValueFormat(String valueFormat) {
-//		this.valueFormat = valueFormat;
-//	}
+	public String getValueFormat() {
+		return valueFormat;
+	}
+
+	public void setValueFormat(String valueFormat) {
+		this.valueFormat = valueFormat;
+	}
 
 	public Object getChange() {
 		return change;
@@ -57,13 +59,13 @@ public class Cell {
 		this.change = change;
 	}
 
-//	public String getChangeFormat() {
-//		return changeFormat;
-//	}
-//
-//	public void setChangeFormat(String changeFormat) {
-//		this.changeFormat = changeFormat;
-//	}
+	// public String getChangeFormat() {
+	// return changeFormat;
+	// }
+	//
+	// public void setChangeFormat(String changeFormat) {
+	// this.changeFormat = changeFormat;
+	// }
 
 	@Override
 	public String toString() {

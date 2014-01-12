@@ -17,6 +17,10 @@ public abstract class AbstractDataProvider implements DataProvider {
 		this.kpiName = kpiName;
 	}
 
+	/**
+	 * 
+	 * @return The KPI name for this data provider.
+	 */
 	public String getKpiName() {
 		return kpiName;
 	}

@@ -1,11 +1,9 @@
-package com.databox.sdk.widgets.progress;
+package com.databox.sdk.widgets;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 import com.databox.sdk.kpi.KPI;
-import com.databox.sdk.widgets.AbstractBuilder;
-import com.databox.sdk.widgets.AbstractDataProvider;
 
 /**
  * Use ProgressDataProvider.Builder to create a new instance of ProgressDataProvider. Builder ensures that all needed data is entered before creating a new
@@ -19,16 +17,24 @@ public class ProgressDataProvider extends AbstractDataProvider {
 	private Double value;
 	private Double maxValue;
 
+	/**
+	 * 
+	 * @param kpiName
+	 *            used when the custom connection was created on WEB app page.
+	 */
 	private ProgressDataProvider(String kpiName) {
 		super(kpiName);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public Collection<KPI> getKPIs() {
+	public final Collection<KPI> getKPIs() {
 		ArrayList<KPI> kpis = new ArrayList<KPI>();
-		kpis.add(new KPI.Builder().setKey(kpiName + "@labels").setValue(label).setDate(date).build());
-		kpis.add(new KPI.Builder().setKey(kpiName + "@max").setValue(maxValue).setDate(date).build());
-		kpis.add(new KPI.Builder().setKey(kpiName + "@value").setValue(value).setDate(date).build());
+		kpis.add(new KPI.Builder().setKey(kpiName + "@label").setValue(label).setDate(date).build());
+		kpis.add(new KPI.Builder().setKey(kpiName + "").setValue(value).setDate(date).build());
+		kpis.add(new KPI.Builder().setKey(kpiName + "@max_value").setValue(maxValue).setDate(date).build());
 		return kpis;
 	}
 

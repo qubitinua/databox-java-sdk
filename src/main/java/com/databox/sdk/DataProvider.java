@@ -12,5 +12,9 @@ import com.databox.sdk.kpi.KPI;
  * 
  */
 public interface DataProvider {
+	/**
+	 * 
+	 * @return List of KPI's for data provider.
+	 */
 	public Collection<KPI> getKPIs();
 }

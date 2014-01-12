@@ -1,4 +1,4 @@
-package com.databox.sdk.widget;
+package com.databox.sdk.widgets;
 
 import java.util.Date;
 

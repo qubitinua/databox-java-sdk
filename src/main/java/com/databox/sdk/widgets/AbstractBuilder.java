@@ -7,7 +7,7 @@ import java.util.Date;
  * @author Uros Majeric
  * 
  */
-public abstract class AbstractBuilder<T extends AbstractDataProvider> {
+abstract class AbstractBuilder<T extends AbstractDataProvider> {
 	protected String kpiName;
 	protected Date date;
 

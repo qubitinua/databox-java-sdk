@@ -19,7 +19,9 @@ public class DataboxSample {
 	public static void main(String[] args) throws Exception {
 		DataSink<DataboxCustomConnection> sink = new DataboxSink();
 
-		DataboxCustomConnection connection = new DataboxCustomConnection("hd32o1ga8sf7sad0fu9sdufs8440442kj2", "3m2k3u2o3i4hujlb");
+		String pushToken = "hd32o1ga8sf7sad0fu9sdufs8440442kj2";
+		String pushURL = "3m2k3u2o3i4hujlb";
+		DataboxCustomConnection connection = new DataboxCustomConnection(pushToken, pushURL);
 		XSLDailyDataProvider xlsxDataProvider = new XSLDailyDataProvider("cycling.xlsx");
 		connection.addDataProvider(xlsxDataProvider);
 

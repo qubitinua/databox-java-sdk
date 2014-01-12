@@ -1,14 +1,14 @@
-package com.databox.sdk.widget;
+package com.databox.sdk.widgets;
 
-import com.databox.sdk.widgets.funnel.FunnelDataProvider;
+import com.databox.sdk.widgets.FunnelDataProvider;
 
 public class FunnelDataProviderTest extends AbstractDataProviderTest<FunnelDataProvider> {
 
 	@Override
 	protected void addAdditionalData(FunnelDataProvider dataProvider) {
-		dataProvider.addSlice("Visitors", 56798, 100);
-		dataProvider.addSlice("Signups", 6342, 11.1659d);
-		dataProvider.addSlice("Buys", 341);
+		dataProvider.addItem("Visitors", 56798, 100);
+		dataProvider.addItem("Signups", 6342, 11.1659d);
+		dataProvider.addItem("Buys", 341);
 	}
 
 	@Override

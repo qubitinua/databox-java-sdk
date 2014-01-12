@@ -8,6 +8,10 @@ import java.util.TimeZone;
 
 /**
  * 
+ * KPI class that is send to the Databox server.<br />
+ * Use KPI.Builder to create an instance of this class.
+ * 
+ * 
  * @author Uros Majeric
  * 
  */
@@ -104,6 +108,12 @@ public class KPI {
 		return true;
 	}
 
+	/**
+	 * Each KPI is created via this Builder class. It is used to simplify the creation of the KPIs, with different creation settings.
+	 * 
+	 * @author Uros Majeric
+	 * 
+	 */
 	public static class Builder {
 		public static final TimeZone DEFAULT_TIME_ZONE = TimeZone.getTimeZone("UTC");
 		private static SimpleDateFormat SDF;
@@ -133,6 +143,11 @@ public class KPI {
 			return this;
 		}
 
+		/**
+		 * KPI created with this method call will have its date field normalized to zero hour at the day.
+		 * 
+		 * @return
+		 */
 		public Builder normalized() {
 			_normalized = true;
 			return this;

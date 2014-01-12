@@ -19,11 +19,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 /**
+ * Default implementation for DataSink. DataboxSink is a sink for the KPIs generated for custom connection created on Databox WEB app.
  * 
  * @author Uros Majeric
  * 
  */
 public class DataboxSink implements DataSink<DataboxCustomConnection> {
+	private static final String PUSH_URL_PATH = "/push/custom";
 	private static final Logger logger = LoggerFactory.getLogger(DataboxSink.class);
 
 	/**
@@ -36,10 +38,8 @@ public class DataboxSink implements DataSink<DataboxCustomConnection> {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @return
 	 */
 	@Override
-	/* TODO fix the returning here */
 	public ResponseWrapper push(DataboxCustomConnection connection) throws DataPushException {
 		ResponseWrapper responseWrapper = new ResponseWrapper();
 		DataboxRequestModel aggregated = new DataboxRequestModel();
@@ -52,7 +52,13 @@ public class DataboxSink implements DataSink<DataboxCustomConnection> {
 
 		try {
 			String databoxBaseURL = Environment.getDataboxBaseURL();
-			URI url = URI.create(databoxBaseURL + "/push/custom/" + connection.getUniqueURL());
+			String uniqueURL = connection.getUniqueURL();
+			/* if user has entered whole Push URL by mistake then eliminate the leading URL and extract only the App ID */
+			if (uniqueURL.toLowerCase().contains(PUSH_URL_PATH)) {
+				int beginIndex = uniqueURL.toLowerCase().indexOf(PUSH_URL_PATH) + PUSH_URL_PATH.length() + 1;
+				uniqueURL = uniqueURL.substring(beginIndex, uniqueURL.length());
+			}
+			URI url = URI.create(databoxBaseURL + PUSH_URL_PATH + "/" + uniqueURL);
 
 			DataboxHttpClient client = new DataboxHttpClient(url, connection.getApiKey());
 			String response = client.postData(json);

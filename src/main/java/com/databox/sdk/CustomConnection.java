@@ -8,5 +8,10 @@ import java.util.List;
  * 
  */
 public interface CustomConnection {
+
+	/**
+	 * 
+	 * @return list of DataProviders for this connection.
+	 */
 	List<DataProvider> getDataProviders();
 }

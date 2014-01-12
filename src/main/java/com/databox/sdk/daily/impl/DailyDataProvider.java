@@ -43,8 +43,17 @@ public class DailyDataProvider implements DataProvider {
 		}
 	}
 
+	/**
+	 * Method searches for already existing KPI (for the provided date) in the list. If KPI is found then only value is incremented, otherwise a new KPI is
+	 * added.
+	 * 
+	 * @param key
+	 *            KPI key for which we are incrementing a value
+	 * @param date
+	 *            Date (that will be normalized) for which we are adding the KPI
+	 */
 	public void incrementKPIsValue(String key, Date date) {
 		addKPI(key, date, 1D);
 	}
-	
+
 }

@@ -1,37 +1,40 @@
-package com.databox.sdk.widgets.messages;
+package com.databox.sdk.widgets;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.databox.sdk.kpi.KPI;
-import com.databox.sdk.widgets.AbstractDataProvider;
+import com.google.gson.Gson;
 
 /**
+ * Helper data provider for the Messages widget.
  * 
  * @author Uros Majeric
  * 
  */
 public class MessagesDataProvider extends AbstractDataProvider {
-	private static final Logger logger = LoggerFactory.getLogger(MessagesDataProvider.class);
 	private List<String> messages = new ArrayList<String>();
 
+	/**
+	 * 
+	 * @param kpiName
+	 *            used when the custom connection was created on WEB app page.
+	 */
 	public MessagesDataProvider(String kpiName) {
 		super(kpiName);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public Collection<KPI> getKPIs() {
+	public final Collection<KPI> getKPIs() {
 		ArrayList<KPI> kpis = new ArrayList<KPI>();
 
-		for (int i = 0; i < messages.size(); i++) {
-			String msg = messages.get(i);
-			if (msg != null) {
-				kpis.add(new KPI.Builder().setKey(kpiName + "@message_" + i).setValue(msg).setDate(date).build());
-			}
+		if (messages != null && !messages.isEmpty()) {
+			Gson gson = new Gson();
+			kpis.add(new KPI.Builder().setKey(kpiName).setValue(gson.toJson(messages)).setDate(date).build());
 		}
 		return kpis;
 	}

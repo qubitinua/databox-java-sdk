@@ -1,12 +1,10 @@
-package com.databox.sdk.widget;
+package com.databox.sdk.widgets;
 
-import com.databox.sdk.widgets.progress.ProgressDataProvider;
+import com.databox.sdk.widgets.ProgressDataProvider;
+import com.databox.sdk.widgets.TableDataProvider;
 import com.databox.sdk.widgets.table.Cell;
-import com.databox.sdk.widgets.table.Column;
-import com.databox.sdk.widgets.table.Column.ColumnSort;
-import com.databox.sdk.widgets.table.Column.ColumnType;
+import com.databox.sdk.widgets.table.OrderBy.ColumnSort;
 import com.databox.sdk.widgets.table.Row;
-import com.databox.sdk.widgets.table.TableDataProvider;
 
 public class TableDataProviderTest extends AbstractBuilderDataProviderTest<TableDataProvider, TableDataProvider.Builder> {
 	protected ProgressDataProvider _dataProvider;
@@ -16,13 +14,16 @@ public class TableDataProviderTest extends AbstractBuilderDataProviderTest<Table
 		super.setUp();
 	}
 
+	@Override
 	protected void addAdditionalData(TableDataProvider.Builder builder) {
 		/* Define columns for the table */
-		builder.addColumn(new Column("Visitors", ColumnType.STRING, ColumnSort.asc));
-		builder.addColumn(new Column("Today", ColumnType.STRING));
+		builder.addColumn("Visitors");
+		builder.addColumn("Today");
+
+		builder.addOrderBy("Visitors", ColumnSort.asc);
 
 		/* Add rows to the table */
-		Row row = new Row.Builder().addCell(new Cell("Returning")).addCell(new Cell(44937)).build();
+		Row row = new Row.Builder().addCell(new Cell("Returning")).addCell(new Cell(44937, 12, "%d")).build();
 		builder.addRow(row);
 		row = new Row.Builder().addCell(new Cell("New ($)")).addCell(new Cell(2380.84)).build();
 		builder.addRow(row);
@@ -30,6 +31,7 @@ public class TableDataProviderTest extends AbstractBuilderDataProviderTest<Table
 		builder.addRow(row);
 	}
 
+	@Override
 	protected String getKPIName() {
 		return "new_vs_returning";
 	}
@@ -42,7 +44,7 @@ public class TableDataProviderTest extends AbstractBuilderDataProviderTest<Table
 	public void testTableDataProviderWrongNumberOfColumns() {
 		TableDataProvider.Builder builder = new TableDataProvider.Builder();
 		builder.setKPIName("new_vs_returning"); //
-		builder.addColumn(new Column("Visitors", ColumnType.STRING, ColumnSort.asc));
+		builder.addColumn("Visitors");
 
 		builder.addRow(new Row.Builder().addCell(new Cell("Returning")).addCell(new Cell(44937)).build());
 		try {

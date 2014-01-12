@@ -14,7 +14,7 @@ public interface DataSink<T extends CustomConnection> {
 	/**
 	 * Push the data from all connections to the sink.
 	 * 
-	 * @return true if succeeded, false otherwise.
+	 * @return The response that was returned from Databox server wrapped in a ResponseWrapper.
 	 * 
 	 * @throws DataPushException
 	 */
