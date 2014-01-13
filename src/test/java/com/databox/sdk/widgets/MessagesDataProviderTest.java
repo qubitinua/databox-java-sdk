@@ -17,7 +17,7 @@ public class MessagesDataProviderTest extends AbstractDataProviderTest<MessagesD
 
 	@Override
 	protected MessagesDataProvider newDataProvider() {
-		return new MessagesDataProvider("visits");
+		return new MessagesDataProvider("messages");
 	}
 
 }
