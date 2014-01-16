@@ -1,4 +1,4 @@
-package com.databox.sdk.widgets;
+ package com.databox.sdk.widgets;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,7 +14,12 @@ import com.google.gson.Gson;
  * 
  */
 public class MessagesDataProvider extends AbstractDataProvider {
+	public enum IconType {
+		EUR, USD, User, Lead, Ticket;
+	}
+	
 	private List<String> messages = new ArrayList<String>();
+	private List<IconType> icons = new ArrayList<IconType>();
 
 	/**
 	 * 
@@ -35,11 +40,24 @@ public class MessagesDataProvider extends AbstractDataProvider {
 		if (messages != null && !messages.isEmpty()) {
 			Gson gson = new Gson();
 			kpis.add(new KPI.Builder().setKey(kpiName).setValue(gson.toJson(messages)).setDate(date).build());
+			/* icons list have to have the same number of elements as messages */
+			kpis.add(new KPI.Builder().setKey(kpiName + "@icons").setValue(gson.toJson(icons)).setDate(date).build());
 		}
 		return kpis;
 	}
 
+	/**
+	 * Add message with default icon type.
+	 */
 	public void add(String message) {
+		this.add(message, null);
+	}
+	
+	/**
+	 * Add message with icon type.
+	 */
+	public void add(String message, IconType iconType) {
 		messages.add(message);
+		icons.add(iconType);
 	}
 }
