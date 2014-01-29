@@ -23,6 +23,7 @@ public abstract class AbstractDataProviderTest<T extends AbstractDataProvider> e
 		/* Date is optional (current date is used by default) */
 		_dataProvider = newDataProvider();
 		_dataProvider.setDate(new Date());
+		_dataProvider.setNormalized(true);
 
 		addAdditionalData(_dataProvider);
 

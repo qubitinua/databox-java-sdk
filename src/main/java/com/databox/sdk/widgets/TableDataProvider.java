@@ -77,12 +77,12 @@ public class TableDataProvider extends AbstractDataProvider {
 		}
 
 		Gson gson = new Gson();
-		kpis.add(new KPI.Builder().setKey(kpiName + "@columns").setValue(gson.toJson(columns)).setDate(date).build());
-		kpis.add(new KPI.Builder().setKey(kpiName + "@rows").setValue(gson.toJson(rowValues)).setDate(date).build());
-		kpis.add(new KPI.Builder().setKey(kpiName + "@changes").setValue(gson.toJson(changes)).setDate(date).build());
-		kpis.add(new KPI.Builder().setKey(kpiName + "@formats").setValue(gson.toJson(valueFormats)).setDate(date).build());
-		// kpis.add(new KPI.Builder().setKey(kpiName + "@change_format_" + i).setValue(gson.toJson(changeFormats)).setDate(date).build());
-		kpis.add(new KPI.Builder().setKey(kpiName + "@order_by").setValue(gson.toJson(orderByColumns)).setDate(date).build());
+		kpis.add(new KPI.Builder().setKey(kpiName + "@columns").setValue(gson.toJson(columns)).setDate(date).setNormalized(normalized).build());
+		kpis.add(new KPI.Builder().setKey(kpiName + "@rows").setValue(gson.toJson(rowValues)).setDate(date).setNormalized(normalized).build());
+		kpis.add(new KPI.Builder().setKey(kpiName + "@changes").setValue(gson.toJson(changes)).setDate(date).setNormalized(normalized).build());
+		kpis.add(new KPI.Builder().setKey(kpiName + "@formats").setValue(gson.toJson(valueFormats)).setDate(date).setNormalized(normalized).build());
+		// kpis.add(new KPI.Builder().setKey(kpiName + "@change_format_" + i).setValue(gson.toJson(changeFormats)).setDate(date).setNormalized(normalized).build());
+		kpis.add(new KPI.Builder().setKey(kpiName + "@order_by").setValue(gson.toJson(orderByColumns)).setDate(date).setNormalized(normalized).build());
 
 		return kpis;
 	}

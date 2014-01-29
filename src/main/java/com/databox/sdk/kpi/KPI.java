@@ -152,6 +152,16 @@ public class KPI {
 			_normalized = true;
 			return this;
 		}
+		
+		/**
+		 * KPI created with this method call will have its date field normalized to zero hour at the day.
+		 * 
+		 * @return
+		 */
+		public Builder setNormalized(boolean normalized) {
+			_normalized = normalized;
+			return this;
+		}
 
 		public KPI build() {
 			KPI kpi = new KPI();

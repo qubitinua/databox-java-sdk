@@ -24,6 +24,13 @@ public class DataboxSample {
 		DataboxCustomConnection connection = new DataboxCustomConnection(pushToken, pushURL);
 		XSLDailyDataProvider xlsxDataProvider = new XSLDailyDataProvider("cycling.xlsx");
 		connection.addDataProvider(xlsxDataProvider);
+		
+//		DefaultDataProvider dataProvider = new DefaultDataProvider();
+//		Calendar c = new GregorianCalendar();
+//		dataProvider.addKPI(new KPI.Builder().setKey("visits_this_month").setValue(234D).setDate(c.getTime()).build());
+//		c.add(Calendar.DAY_OF_MONTH, -1);
+//		dataProvider.addKPI(new KPI.Builder().setKey("visits_this_month").setValue(431D).build());
+//		connection.addDataProvider(dataProvider);
 
 		ResponseWrapper response = sink.push(connection);
 		logger.info(response.getMessage());

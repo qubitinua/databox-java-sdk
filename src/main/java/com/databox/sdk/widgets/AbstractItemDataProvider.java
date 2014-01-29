@@ -40,9 +40,9 @@ public abstract class AbstractItemDataProvider extends AbstractDataProvider {
 			}
 		}
 
-		kpis.add(new KPI.Builder().setKey(kpiName + "@labels").setValue(gson.toJson(labels)).setDate(date).build());
-		kpis.add(new KPI.Builder().setKey(kpiName + "@values").setValue(gson.toJson(values)).setDate(date).build());
-		kpis.add(new KPI.Builder().setKey(kpiName + "@changes").setValue(gson.toJson(changes)).setDate(date).build());
+		kpis.add(new KPI.Builder().setKey(kpiName + "@labels").setValue(gson.toJson(labels)).setDate(date).setNormalized(normalized).build());
+		kpis.add(new KPI.Builder().setKey(kpiName + "@values").setValue(gson.toJson(values)).setDate(date).setNormalized(normalized).build());
+		kpis.add(new KPI.Builder().setKey(kpiName + "@changes").setValue(gson.toJson(changes)).setDate(date).setNormalized(normalized).build());
 		return kpis;
 	}
 

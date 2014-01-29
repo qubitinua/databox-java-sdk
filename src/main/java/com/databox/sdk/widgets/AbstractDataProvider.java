@@ -12,6 +12,7 @@ import com.databox.sdk.DataProvider;
 public abstract class AbstractDataProvider implements DataProvider {
 	protected final String kpiName;
 	protected Date date;
+	protected boolean normalized;
 
 	protected AbstractDataProvider(String kpiName) {
 		this.kpiName = kpiName;
@@ -31,5 +32,13 @@ public abstract class AbstractDataProvider implements DataProvider {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public boolean isNormalized() {
+		return normalized;
+	}
+
+	public void setNormalized(boolean normalized) {
+		this.normalized = normalized;
 	}
 }
