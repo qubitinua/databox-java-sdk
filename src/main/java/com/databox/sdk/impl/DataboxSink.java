@@ -52,12 +52,7 @@ public class DataboxSink implements DataSink<DataboxCustomConnection> {
 
 		try {
 			String databoxBaseURL = Environment.getDataboxBaseURL();
-			String uniqueURL = connection.getUniqueURL();
-			/* if user has entered whole Push URL by mistake then eliminate the leading URL and extract only the App ID */
-			if (uniqueURL.toLowerCase().contains(PUSH_URL_PATH)) {
-				int beginIndex = uniqueURL.toLowerCase().indexOf(PUSH_URL_PATH) + PUSH_URL_PATH.length() + 1;
-				uniqueURL = uniqueURL.substring(beginIndex, uniqueURL.length());
-			}
+			String uniqueURL = getUniqueUrl(connection);
 			URI url = URI.create(databoxBaseURL + PUSH_URL_PATH + "/" + uniqueURL);
 
 			DataboxHttpClient client = new DataboxHttpClient(url, connection.getApiKey());
@@ -78,6 +73,26 @@ public class DataboxSink implements DataSink<DataboxCustomConnection> {
 			throw new DataPushException(e);
 		}
 		return responseWrapper;
+	}
+
+	protected String getUniqueUrl(DataboxCustomConnection connection) {
+		String uniqueURL = connection.getUniqueURL();
+		/* if user has entered whole Push URL by mistake then eliminate the leading URL and extract only the App ID */
+		if (uniqueURL.toLowerCase().contains(PUSH_URL_PATH)) {
+			int beginIndex = uniqueURL.toLowerCase().indexOf(PUSH_URL_PATH) + PUSH_URL_PATH.length() + 1;
+			uniqueURL = uniqueURL.substring(beginIndex, uniqueURL.length());
+		}
+		return uniqueURL;
+	}
+
+	public String getLogs(DataboxCustomConnection connection) throws Exception {
+		String databoxBaseURL = Environment.getDataboxBaseURL();
+		String uniqueURL = getUniqueUrl(connection);
+		URI url = URI.create(databoxBaseURL + PUSH_URL_PATH + "/" + uniqueURL + "/logs");
+
+		DataboxHttpClient client = new DataboxHttpClient(url, connection.getApiKey());
+		String response = client.get();
+		return response;
 	}
 
 	private boolean parseResponse(String response, ResponseWrapper responseWrapper) {

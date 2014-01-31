@@ -20,4 +20,15 @@ public interface DataSink<T extends CustomConnection> {
 	 */
 	ResponseWrapper push(T connection) throws DataPushException;
 
+	/**
+	 * 
+	 * Method returns the logs for the latest push for connection.
+	 * 
+	 * @param connection
+	 *            Connection for which we would like to get the log.
+	 * @return String for the latest error.
+	 * @throws Exception
+	 */
+	String getLogs(T connection) throws Exception;
+
 }

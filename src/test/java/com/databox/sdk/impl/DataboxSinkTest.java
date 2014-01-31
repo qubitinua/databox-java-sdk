@@ -50,8 +50,13 @@ public class DataboxSinkTest extends TestCase {
 
 			try {
 				ResponseWrapper response = _sink.push(_connection);
+				if (!response.isSucceeded()) {
+					logger.error(_sink.getLogs(_connection));
+				}
 				logger.info("Response succceeded: {}, with message: '{}'", response.isSucceeded(), response.getMessage());
 			} catch (DataPushException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}

@@ -18,6 +18,7 @@ import org.apache.http.client.AuthCache;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.protocol.HttpClientContext;
@@ -66,10 +67,23 @@ class DataboxHttpClient {
 	public String postData(String data) throws AuthenticationException, ClientProtocolException, IOException, KeyManagementException, NoSuchAlgorithmException,
 			KeyStoreException {
 		logger.debug("postData: " + data);
-
-		HttpHost targetHost = new HttpHost(_url.getHost(), _url.getPort(), _url.getScheme());
-
 		HttpRequestBase httpRequest = prepareRequest(_url, data);
+		String response = invokeRequest(httpRequest);
+		return response;
+	}
+
+	public String get() throws AuthenticationException, ClientProtocolException, IOException, KeyManagementException, NoSuchAlgorithmException,
+			KeyStoreException {
+		HttpRequestBase httpRequest = new HttpGet(_url);
+		addAddHeaders(httpRequest);
+
+		/* Invoke the request */
+		String response = invokeRequest(httpRequest);
+		return response;
+	}
+
+	private String invokeRequest(HttpRequestBase httpRequest) throws NoSuchAlgorithmException, KeyManagementException, KeyStoreException, IOException {
+		HttpHost targetHost = new HttpHost(_url.getHost(), _url.getPort(), _url.getScheme());
 
 		CredentialsProvider credsProvider = new BasicCredentialsProvider();
 		credsProvider.setCredentials(new AuthScope(targetHost.getHostName(), targetHost.getPort()), new UsernamePasswordCredentials(_username, _password));
@@ -126,8 +140,7 @@ class DataboxHttpClient {
 
 	protected HttpRequestBase prepareRequest(URI url, String data) throws UnsupportedEncodingException {
 		HttpPost post = new HttpPost(url);
-		post.setHeader("Accept", POST_CONTENT_TYPE);
-		post.addHeader("User-Agent", Environment.getUserAgent());
+		addAddHeaders(post);
 
 		/* convert the request object to a string that will be sent in the post */
 		StringEntity entity = new StringEntity(data, "UTF-8");
@@ -135,6 +148,11 @@ class DataboxHttpClient {
 		post.setEntity(entity);
 
 		return post;
+	}
+
+	private void addAddHeaders(HttpRequestBase post) {
+		post.setHeader("Accept", POST_CONTENT_TYPE);
+		post.addHeader("User-Agent", Environment.getUserAgent());
 	}
 
 	public String getLastStatus() {
