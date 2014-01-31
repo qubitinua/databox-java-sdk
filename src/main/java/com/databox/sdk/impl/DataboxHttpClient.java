@@ -95,11 +95,10 @@ class DataboxHttpClient {
 				response = httpclient.execute(targetHost, httpRequest, localContext);
 
 				int responseStatus = response.getStatusLine().getStatusCode();
-				if (responseStatus == 200) {
+				_lastStatus = response.getStatusLine().toString();
+				if (responseStatus >= 200 && responseStatus < 300) {
 					HttpEntity res_entity = response.getEntity();
 					return EntityUtils.toString(res_entity, "UTF-8");
-				} else {
-					_lastStatus = response.getStatusLine().toString();
 				}
 			} catch (Exception e) {
 				logger.error(e.getLocalizedMessage(), e);
