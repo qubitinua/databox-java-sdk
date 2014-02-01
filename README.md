@@ -113,6 +113,6 @@ Databox `custom-datasource-sdk` is licensed under the Apache License, Version 2.
 
 ### Contributors
 
-- The Databox team, most importantly [Uros Majeric](http://github.com/umajeric) 
+- [Uros Majeric](http://github.com/umajeric) 
 
 
