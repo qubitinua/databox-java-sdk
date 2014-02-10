@@ -52,7 +52,11 @@ class DataboxHttpClient {
 	private final URI _url;
 	private final String _username;
 	private final String _password;
-	private String _lastStatus;
+
+	/**
+	 * Last response returned form Service
+	 */
+	private static final ThreadLocal<String> _lastStatus = new ThreadLocal<String>();
 
 	public DataboxHttpClient(URI url, String username) {
 		this(url, username, null);
@@ -109,7 +113,7 @@ class DataboxHttpClient {
 				response = httpclient.execute(targetHost, httpRequest, localContext);
 
 				int responseStatus = response.getStatusLine().getStatusCode();
-				_lastStatus = response.getStatusLine().toString();
+				_lastStatus.set(response.getStatusLine().toString());
 				if (responseStatus >= 200 && responseStatus < 300) {
 					HttpEntity res_entity = response.getEntity();
 					return EntityUtils.toString(res_entity, "UTF-8");
@@ -156,6 +160,6 @@ class DataboxHttpClient {
 	}
 
 	public String getLastStatus() {
-		return _lastStatus;
+		return _lastStatus.get();
 	}
 }
