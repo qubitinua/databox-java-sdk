@@ -10,8 +10,7 @@ public class Cell {
 	private Object value;
 	private Object change;
 	private String valueFormat;
-
-	// private String changeFormat;
+	private String changeFormat;
 
 	public Cell() {
 	}
@@ -32,7 +31,7 @@ public class Cell {
 		this.value = value;
 		this.change = change;
 		this.valueFormat = valueFormat;
-		// this.changeFormat = changeFormat;
+		this.changeFormat = changeFormat;
 	}
 
 	public Object getValue() {
@@ -59,13 +58,13 @@ public class Cell {
 		this.change = change;
 	}
 
-	// public String getChangeFormat() {
-	// return changeFormat;
-	// }
-	//
-	// public void setChangeFormat(String changeFormat) {
-	// this.changeFormat = changeFormat;
-	// }
+	public String getChangeFormat() {
+		return changeFormat;
+	}
+
+	public void setChangeFormat(String changeFormat) {
+		this.changeFormat = changeFormat;
+	}
 
 	@Override
 	public String toString() {

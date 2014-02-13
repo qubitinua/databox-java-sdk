@@ -54,26 +54,25 @@ public class TableDataProvider extends AbstractDataProvider {
 		List<List<Object>> rowValues = new ArrayList<List<Object>>();
 		List<List<Object>> changes = new ArrayList<List<Object>>();
 		List<List<String>> valueFormats = new ArrayList<List<String>>();
-		// List<List<String>> changeFormats = new ArrayList<List<String>>();
+		List<List<String>> changeFormats = new ArrayList<List<String>>();
 
 		/* Add rows to the KPIs */
 		for (int i = 0; i < rows.size(); i++) {
 			Row row = rows.get(i);
-			// List<String> changeFormats = new ArrayList<String>();
 			List<Object> values = new ArrayList<Object>();
 			List<Object> ch = new ArrayList<Object>();
 			List<String> fmts = new ArrayList<String>();
-			// List<String> chFmts = new ArrayList<String>();
+			List<String> chFmts = new ArrayList<String>();
 			for (Cell cell : row.getCells()) {
 				values.add(cell.getValue());
 				ch.add(cell.getChange());
 				fmts.add(cell.getValueFormat());
-				// changeFormats.add(cell.getChangeFormat());
+				chFmts.add(cell.getChangeFormat());
 			}
 			rowValues.add(values);
 			changes.add(ch);
 			valueFormats.add(fmts);
-			// changeFormats.add(chFmts);
+			changeFormats.add(chFmts);
 		}
 
 		Gson gson = new Gson();
@@ -81,7 +80,7 @@ public class TableDataProvider extends AbstractDataProvider {
 		kpis.add(new KPI.Builder().setKey(kpiName + "@rows").setValue(gson.toJson(rowValues)).setDate(date).setNormalized(normalized).build());
 		kpis.add(new KPI.Builder().setKey(kpiName + "@changes").setValue(gson.toJson(changes)).setDate(date).setNormalized(normalized).build());
 		kpis.add(new KPI.Builder().setKey(kpiName + "@formats").setValue(gson.toJson(valueFormats)).setDate(date).setNormalized(normalized).build());
-		// kpis.add(new KPI.Builder().setKey(kpiName + "@change_format_" + i).setValue(gson.toJson(changeFormats)).setDate(date).setNormalized(normalized).build());
+		kpis.add(new KPI.Builder().setKey(kpiName + "@changes_formats").setValue(gson.toJson(changeFormats)).setDate(date).setNormalized(normalized).build());
 		kpis.add(new KPI.Builder().setKey(kpiName + "@order_by").setValue(gson.toJson(orderByColumns)).setDate(date).setNormalized(normalized).build());
 
 		return kpis;
