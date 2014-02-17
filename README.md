@@ -116,3 +116,4 @@ Databox `custom-datasource-sdk` is licensed under the Apache License, Version 2.
 - [Uros Majeric](http://github.com/umajeric) 
 
 
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/umajeric/databox-java-sdk/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
