@@ -35,7 +35,7 @@ Then add a dependency for Databox Custom DataSource artefact (see [here](https:/
 <dependency>
 	<groupId>com.databox</groupId>
 	<artifactId>custom-datasource-sdk</artifactId>
-	<version>${databox-sdk.version}</version>
+	<version>LATEST</version>
 </dependency>
 ```
 
