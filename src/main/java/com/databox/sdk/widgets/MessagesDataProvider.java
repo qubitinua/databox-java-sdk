@@ -15,11 +15,11 @@ import com.google.gson.Gson;
  */
 public class MessagesDataProvider extends AbstractDataProvider {
 	public enum IconType {
-		EUR, USD, User, Lead, Ticket;
+		Number, EUR, USD, User, Lead, Ticket;
 	}
 
-	private List<String> messages = new ArrayList<String>();
-	private List<IconType> icons = new ArrayList<IconType>();
+	private final List<String> messages = new ArrayList<String>();
+	private final List<IconType> icons = new ArrayList<IconType>();
 
 	/**
 	 * 
@@ -37,20 +37,24 @@ public class MessagesDataProvider extends AbstractDataProvider {
 	public final Collection<KPI> getKPIs() {
 		ArrayList<KPI> kpis = new ArrayList<KPI>();
 
-		if (messages != null && !messages.isEmpty()) {
+		if (messages != null && !messages.isEmpty() && icons != null) {
+			if (messages.size() != icons.size()) {
+				throw new RuntimeException("Wrong number of icons for messages (KPI: " + kpiName + ")!");
+			}
 			Gson gson = new Gson();
 			kpis.add(new KPI.Builder().setKey(kpiName).setValue(gson.toJson(messages)).setDate(date).setNormalized(normalized).build());
 			/* icons list have to have the same number of elements as messages */
-			kpis.add(new KPI.Builder().setKey(kpiName + "@icons").setValue(gson.toJson(icons)).setDate(date).setNormalized(normalized).build());
+			kpis.add(new KPI.Builder().setKey(kpiName + "@icons").setValue(gson.toJson(icons)).setDate(date).setNormalized(normalized)
+					.build());
 		}
 		return kpis;
 	}
 
 	/**
-	 * Add message with default icon type.
+	 * Add message with default icon type (IconType.Number).
 	 */
 	public void add(String message) {
-		this.add(message, null);
+		this.add(message, IconType.Number);
 	}
 
 	/**
