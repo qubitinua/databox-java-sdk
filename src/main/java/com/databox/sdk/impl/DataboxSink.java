@@ -1,6 +1,7 @@
 package com.databox.sdk.impl;
 
 import java.net.URI;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -20,24 +21,27 @@ import com.google.gson.JsonParser;
 
 /**
  * Default implementation for DataSink. DataboxSink is a sink for the KPIs generated for custom connection created on Databox WEB app.
- * 
+ *
  * @author Uros Majeric
- * 
+ *
  */
 public class DataboxSink implements DataSink<DataboxCustomConnection> {
-	private static final String PUSH_URL_PATH = "/push/custom";
 	private static final Logger logger = LoggerFactory.getLogger(DataboxSink.class);
+	private static final String PUSH_DATA_PATH = "/source/{0}/data";
+	private static final String LOGS_PATH = "/source/{0}/logs";
+	private final String _apiKey;
 
 	/**
-	 * 
+	 * @param apiKey
+	 *
 	 */
-	public DataboxSink() {
-
+	public DataboxSink(String apiKey) {
+		_apiKey = apiKey;
 	}
 
 	/**
 	 * {@inheritDoc}
-	 * 
+	 *
 	 */
 	@Override
 	public ResponseWrapper push(DataboxCustomConnection connection) throws DataPushException {
@@ -52,10 +56,10 @@ public class DataboxSink implements DataSink<DataboxCustomConnection> {
 
 		try {
 			String databoxBaseURL = Environment.getDataboxBaseURL();
-			String uniqueURL = getUniqueUrl(connection);
-			URI url = URI.create(databoxBaseURL + PUSH_URL_PATH + "/" + uniqueURL);
+			String pushDataPath = MessageFormat.format(PUSH_DATA_PATH, connection.getSourceToken());
+			URI url = URI.create(databoxBaseURL + "/" + pushDataPath);
 
-			DataboxHttpClient client = new DataboxHttpClient(url, connection.getApiKey());
+			DataboxHttpClient client = new DataboxHttpClient(url, _apiKey);
 			String response = client.postData(json);
 			logger.debug("Response from Databox server was: {}", response);
 			if (response != null) {
@@ -75,22 +79,13 @@ public class DataboxSink implements DataSink<DataboxCustomConnection> {
 		return responseWrapper;
 	}
 
-	protected String getUniqueUrl(DataboxCustomConnection connection) {
-		String uniqueURL = connection.getUniqueURL();
-		/* if user has entered whole Push URL by mistake then eliminate the leading URL and extract only the App ID */
-		if (uniqueURL.toLowerCase().contains(PUSH_URL_PATH)) {
-			int beginIndex = uniqueURL.toLowerCase().indexOf(PUSH_URL_PATH) + PUSH_URL_PATH.length() + 1;
-			uniqueURL = uniqueURL.substring(beginIndex, uniqueURL.length());
-		}
-		return uniqueURL;
-	}
-
+	@Override
 	public String getLogs(DataboxCustomConnection connection) throws Exception {
 		String databoxBaseURL = Environment.getDataboxBaseURL();
-		String uniqueURL = getUniqueUrl(connection);
-		URI url = URI.create(databoxBaseURL + PUSH_URL_PATH + "/" + uniqueURL + "/logs");
+		String logsPath = MessageFormat.format(LOGS_PATH, connection.getSourceToken());
+		URI url = URI.create(databoxBaseURL + "/" + logsPath);
 
-		DataboxHttpClient client = new DataboxHttpClient(url, connection.getApiKey());
+		DataboxHttpClient client = new DataboxHttpClient(url, _apiKey);
 		String response = client.get();
 		return response;
 	}

@@ -8,7 +8,6 @@ import com.databox.sdk.ResponseWrapper;
 import com.databox.sdk.impl.DataPushException;
 import com.databox.sdk.impl.DataboxCustomConnection;
 import com.databox.sdk.impl.DataboxSink;
-import com.databox.sdk.widgets.AbstractDataProvider;
 import com.google.gson.Gson;
 
 public abstract class AbstractDataProviderTest<T extends AbstractDataProvider> extends TestCase {
@@ -28,18 +27,20 @@ public abstract class AbstractDataProviderTest<T extends AbstractDataProvider> e
 		addAdditionalData(_dataProvider);
 
 		String kpis = new Gson().toJson(_dataProvider.getKPIs());
-		
-		DataboxSink sink = new DataboxSink();
+
+		DataboxSink sink;
+		DataboxCustomConnection connection;
+
 		String apiKey = System.getProperty("databox-api-key");
-		String appId = System.getProperty("databox-app-id");
-		DataboxCustomConnection connection = null;
-		if (apiKey != null && !apiKey.isEmpty() && appId != null && !appId.isEmpty()) {
-			connection = new DataboxCustomConnection(apiKey, appId);
+		String sourceToken = System.getProperty("databox-app-id");
+		if (apiKey != null && !apiKey.isEmpty() && sourceToken != null && !sourceToken.isEmpty()) {
+			sink = new DataboxSink(apiKey);
+			connection = new DataboxCustomConnection(sourceToken);
 		} else {
 			System.err.println("Please provide API Key and APP ID to send data to Databox.");
 			return;
 		}
-		
+
 		System.out.println(kpis);
 
 		connection.addDataProvider(_dataProvider);
