@@ -23,10 +23,10 @@ public class DataboxSinkTest extends TestCase {
 
 	@Override
 	protected void setUp() throws Exception {
-		String apiKey = System.getProperty("databox-api-key");
-		_sink = new DataboxSink(apiKey);
-		String sourceToken = System.getProperty("databox-app-id");
-		if (apiKey != null && !apiKey.isEmpty() && sourceToken != null && !sourceToken.isEmpty()) {
+		String accessToken = System.getProperty("access-token");
+		_sink = new DataboxSink(accessToken);
+		String sourceToken = System.getProperty("source-token");
+		if (accessToken != null && !accessToken.isEmpty() && sourceToken != null && !sourceToken.isEmpty()) {
 			_connection = new DataboxCustomConnection(sourceToken);
 		}
 	}

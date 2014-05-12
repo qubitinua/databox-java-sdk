@@ -29,14 +29,14 @@ public class DataboxSink implements DataSink<DataboxCustomConnection> {
 	private static final Logger logger = LoggerFactory.getLogger(DataboxSink.class);
 	private static final String PUSH_DATA_PATH = "/source/{0}/data";
 	private static final String LOGS_PATH = "/source/{0}/logs";
-	private final String _apiKey;
+	private final String _accessToken;
 
 	/**
-	 * @param apiKey
+	 * @param accessToken
 	 *
 	 */
-	public DataboxSink(String apiKey) {
-		_apiKey = apiKey;
+	public DataboxSink(String accessToken) {
+		_accessToken = accessToken;
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class DataboxSink implements DataSink<DataboxCustomConnection> {
 			String pushDataPath = MessageFormat.format(PUSH_DATA_PATH, connection.getSourceToken());
 			URI url = URI.create(databoxBaseURL + "/" + pushDataPath);
 
-			DataboxHttpClient client = new DataboxHttpClient(url, _apiKey);
+			DataboxHttpClient client = new DataboxHttpClient(url, _accessToken);
 			String response = client.postData(json);
 			logger.debug("Response from Databox server was: {}", response);
 			if (response != null) {
@@ -85,7 +85,7 @@ public class DataboxSink implements DataSink<DataboxCustomConnection> {
 		String logsPath = MessageFormat.format(LOGS_PATH, connection.getSourceToken());
 		URI url = URI.create(databoxBaseURL + "/" + logsPath);
 
-		DataboxHttpClient client = new DataboxHttpClient(url, _apiKey);
+		DataboxHttpClient client = new DataboxHttpClient(url, _accessToken);
 		String response = client.get();
 		return response;
 	}
