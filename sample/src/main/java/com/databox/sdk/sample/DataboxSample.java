@@ -17,11 +17,12 @@ public class DataboxSample {
 	private static final Logger logger = LoggerFactory.getLogger(DataboxSample.class);
 
 	public static void main(String[] args) throws Exception {
-		String pushToken = "hd32o1ga8sf7sad0fu9sdufs8440442kj2";
-		String pushURL = "3m2k3u2o3i4hujlb";
-		DataSink<DataboxCustomConnection> sink = new DataboxSink(pushToken);
+		String userAccessToken = "hd32o1ga8sf7sad0fu9sdufs8440442kj2";
+		String sourceToken = "3m2k3u2o3i4hujlb";
 
-		DataboxCustomConnection connection = new DataboxCustomConnection(pushURL);
+		DataSink<DataboxCustomConnection> sink = new DataboxSink(userAccessToken);
+
+		DataboxCustomConnection connection = new DataboxCustomConnection(sourceToken);
 		XSLDailyDataProvider xlsxDataProvider = new XSLDailyDataProvider("cycling.xlsx");
 		connection.addDataProvider(xlsxDataProvider);
 
