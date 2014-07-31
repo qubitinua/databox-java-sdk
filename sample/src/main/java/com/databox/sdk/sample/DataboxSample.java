@@ -9,19 +9,19 @@ import com.databox.sdk.impl.DataboxCustomConnection;
 import com.databox.sdk.impl.DataboxSink;
 
 /**
- * 
+ *
  * @author Uros Majeric
- * 
+ *
  */
 public class DataboxSample {
 	private static final Logger logger = LoggerFactory.getLogger(DataboxSample.class);
 
 	public static void main(String[] args) throws Exception {
-		DataSink<DataboxCustomConnection> sink = new DataboxSink();
-
 		String pushToken = "hd32o1ga8sf7sad0fu9sdufs8440442kj2";
 		String pushURL = "3m2k3u2o3i4hujlb";
-		DataboxCustomConnection connection = new DataboxCustomConnection(pushToken, pushURL);
+		DataSink<DataboxCustomConnection> sink = new DataboxSink(pushToken);
+
+		DataboxCustomConnection connection = new DataboxCustomConnection(pushURL);
 		XSLDailyDataProvider xlsxDataProvider = new XSLDailyDataProvider("cycling.xlsx");
 		connection.addDataProvider(xlsxDataProvider);
 
