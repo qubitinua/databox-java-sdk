@@ -9,16 +9,20 @@ import java.util.Iterator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.databox.sdk.daily.impl.DailyDataProvider;
 import com.databox.sdk.kpi.KPI;
 
 /**
- * 
+ *
  * @author Uros Majeric
- * 
+ *
  */
 public class XSLDailyDataProvider extends DailyDataProvider {
+	static final Logger logger = LoggerFactory.getLogger(XSLDailyDataProvider.class);
+
 	private final String _fileName;
 
 	public XSLDailyDataProvider(String fileName) {
@@ -32,7 +36,7 @@ public class XSLDailyDataProvider extends DailyDataProvider {
 			try {
 				read();
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.error(e.getLocalizedMessage(), e);
 			}
 		}
 		return this.data;

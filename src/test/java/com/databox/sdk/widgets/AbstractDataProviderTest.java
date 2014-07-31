@@ -4,6 +4,9 @@ import java.util.Date;
 
 import junit.framework.TestCase;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.databox.sdk.ResponseWrapper;
 import com.databox.sdk.impl.DataPushException;
 import com.databox.sdk.impl.DataboxCustomConnection;
@@ -11,6 +14,8 @@ import com.databox.sdk.impl.DataboxSink;
 import com.google.gson.Gson;
 
 public abstract class AbstractDataProviderTest<T extends AbstractDataProvider> extends TestCase {
+	static final Logger logger = LoggerFactory.getLogger(AbstractDataProviderTest.class);
+
 	protected T _dataProvider;
 
 	@Override
@@ -53,7 +58,7 @@ public abstract class AbstractDataProviderTest<T extends AbstractDataProvider> e
 				System.out.println("Data sent!");
 			}
 		} catch (DataPushException e) {
-			e.printStackTrace();
+			logger.error(e.getLocalizedMessage(), e);
 		}
 	}
 

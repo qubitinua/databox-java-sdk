@@ -8,9 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 
+ *
  * @author Uros Majeric
- * 
+ *
  */
 public class Environment {
 	private static final Logger logger = LoggerFactory.getLogger(Environment.class);
@@ -30,7 +30,7 @@ public class Environment {
 				logger.error("Configuration error: {}", ex.getLocalizedMessage());
 			}
 		} catch (IOException ex) {
-			ex.printStackTrace();
+			logger.error(ex.getLocalizedMessage(), ex);
 		}
 	}
 

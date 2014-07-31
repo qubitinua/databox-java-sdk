@@ -75,7 +75,7 @@ One more advanced example (XSLDailyDataProvider implements DataProvider interfac
 	// connection.addDataProvider(new MyCustomDataProviderImpl());
 	connections.add(connection);
 
-	/* For each custom connection in app.databox.com we add a separate connection to the sink (each uses a different API Key and URL postfix) */
+	/* For each custom connection in api.databox.com we add a separate connection to the sink (each uses a different API Key and URL postfix) */
 	// connection = new DataboxCustomConnection("5r4w91ga8sf7sad0fu9sdufs844044", "923noien28dnkj23");
 	/* We can use the same data provider for different connections */
 	// connection.addDataProvider(xlsxDataProvider);

@@ -55,9 +55,9 @@ public class DataboxSinkTest extends TestCase {
 				}
 				logger.info("Response succceeded: {}, with message: '{}'", response.isSucceeded(), response.getMessage());
 			} catch (DataPushException e) {
-				e.printStackTrace();
+				logger.error(e.getLocalizedMessage(), e);
 			} catch (Exception e) {
-				e.printStackTrace();
+				logger.error(e.getLocalizedMessage(), e);
 			}
 		}
 	}
