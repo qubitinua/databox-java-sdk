@@ -42,7 +42,7 @@ public class MessagesDataProvider extends AbstractDataProvider {
 				throw new RuntimeException("Wrong number of icons for messages (KPI: " + kpiName + ")!");
 			}
 			Gson gson = new Gson();
-			kpis.add(new KPI.Builder().setKey(kpiName).setValue(gson.toJson(messages)).setDate(date).setNormalized(normalized).build());
+			kpis.add(new KPI.Builder().setKey(kpiName + "@labels").setValue(gson.toJson(messages)).setDate(date).setNormalized(normalized).build());
 			/* icons list have to have the same number of elements as messages */
 			kpis.add(new KPI.Builder().setKey(kpiName + "@icons").setValue(gson.toJson(icons)).setDate(date).setNormalized(normalized)
 					.build());
